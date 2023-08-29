@@ -252,7 +252,7 @@ namespace Jint.Runtime.Interpreter.Expressions
                 
                 if (AreIntegerOperands(left, right))
                 {
-                    return JsNumber.Create(left.AsInteger() + right.AsInteger());
+                    return JsNumber.Create((long)left.AsInteger() + right.AsInteger());
                 }
 
                 var lprim = TypeConverter.ToPrimitive(left);
@@ -274,7 +274,7 @@ namespace Jint.Runtime.Interpreter.Expressions
                 var right = _right.GetValue();
                 
                 return AreIntegerOperands(left, right)
-                    ? JsNumber.Create(left.AsInteger() - right.AsInteger())
+                    ? JsNumber.Create((long)left.AsInteger() - right.AsInteger())
                     : JsNumber.Create(TypeConverter.ToNumber(left) - TypeConverter.ToNumber(right));
             }
         }

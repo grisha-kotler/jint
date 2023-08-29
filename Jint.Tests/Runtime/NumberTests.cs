@@ -1,4 +1,5 @@
 using System;
+using Jint.Native;
 using Jint.Runtime;
 using Xunit;
 
@@ -56,6 +57,20 @@ namespace Jint.Tests.Runtime
         {
             var value = _engine.Execute($"(3).toPrecision({fractionDigits}).toString()").GetCompletionValue().AsString();
             Assert.Equal(result, value);
+        }
+
+        [Fact]
+        public void CanIncrementInteger()
+        {
+            var value = _engine.Execute("2000000000 + 1000000000").GetCompletionValue();
+            Assert.Equal(new JsNumber((long)3000000000), value);
+        }
+
+        [Fact]
+        public void CanDecrementInteger()
+        {
+            var value = _engine.Execute("2000000000 - (-1000000000)").GetCompletionValue();
+            Assert.Equal(new JsNumber((long)3000000000), value);
         }
     }
 }
